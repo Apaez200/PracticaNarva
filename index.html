@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0f766e">
+    <meta name="description" content="Bitácora de mantenimiento que funciona sin conexión y sincroniza los reportes al volver la red.">
+
+    <title>Bitácora de Mantenimiento</title>
+
+    <link rel="stylesheet" href="./styles.css">
+    <link rel="manifest" href="./manifest.json">
+    <link rel="icon" href="./icon-192.png" type="image/png">
+    <link rel="apple-touch-icon" href="./icon-192.png">
+</head>
+
+<body>
+
+    <header class="app-header">
+        <div>
+            <h1>Bitácora de Mantenimiento</h1>
+            <p class="subtitulo">Reportes de taller · modo sin conexión</p>
+        </div>
+        <span id="badge-red" class="badge online">En Línea</span>
+    </header>
+
+    <main class="contenedor">
+
+        <section class="card">
+            <h2>Registrar Falla</h2>
+
+            <form id="form-incidencia">
+                <label for="titulo">Equipo o máquina</label>
+                <input type="text" id="titulo" placeholder="Ej. Compresor línea 2" required>
+
+                <label for="descripcion">Qué se observó</label>
+                <textarea id="descripcion" rows="5" placeholder="Ruidos, fugas, temperatura, etc." required></textarea>
+
+                <button type="submit">Guardar Reporte</button>
+            </form>
+
+            <p id="estado-envio" class="estado-envio" role="status"></p>
+        </section>
+
+        <section class="card">
+            <div class="header-lista">
+                <h2>Cola de Reportes</h2>
+                <button id="btn-purgar" type="button" class="secundario">Limpiar Enviados</button>
+            </div>
+
+            <ul id="lista-outbox" class="lista-outbox"></ul>
+        </section>
+
+    </main>
+
+    <footer class="pie">
+        <p>Si no hay red, tu reporte se guarda en el dispositivo y se envía solo cuando regrese la conexión.</p>
+    </footer>
+
+    <script src="./db-helper.js"></script>
+    <script src="./app.js"></script>
+
+</body>
+
+</html>
